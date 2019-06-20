@@ -22,9 +22,11 @@
   }
   
   .header-location {
+    display: flex;
     color: $white;
     font-size: 14px;
     max-width: 300px;
+    cursor: pointer;
 
     .locality {
       font-family: gotham-bold;
@@ -43,6 +45,9 @@
 
     .address {
       margin-left: 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

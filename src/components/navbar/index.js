@@ -9,11 +9,13 @@ export default () => (
         NearBy
       </Link>
       <div className="header-location">
-        <span className="locality">
-          Koramangala
+        <span>
+          <span className="locality">
+            Koramangala
+          </span>
         </span>
         <span className="address">
-          Hoodi Main Rd, Doddanakundi Industrial Area 2, Phase 1, Doddanekkundi, Bengaluru, Karnataka, India
+          Hoodi Main Rd, Doddanakundi Industrial Area 2, Phase 1, Doddanekkundi, Bengaluru, Karnataka, India`
         </span>
       </div>
     </div>
