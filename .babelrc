@@ -2,6 +2,17 @@
   "presets": ["env", "react"],
   "plugins": [
     "babel-plugin-transform-class-properties",
-    "dynamic-import-webpack"
-]
+    "dynamic-import-webpack",
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ],
+        "alias": {
+          "~": "./src",
+        }
+      }
+    ],
+  ]
 }
