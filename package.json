@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "babel-eslint": "^8.2.3",
+    "dotenv-webpack": "^1.7.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1"

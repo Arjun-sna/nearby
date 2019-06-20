@@ -3,6 +3,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 const devMode = process.env.NODE_ENV !== 'production';
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
@@ -54,6 +55,7 @@ module.exports = {
   plugins: [
     htmlWebpackPlugin,
     //new BundleAnalyzerPlugin(),
+    new Dotenv({ systemvars: true }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
