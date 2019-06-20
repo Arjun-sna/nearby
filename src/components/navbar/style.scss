@@ -9,14 +9,40 @@
   .nav-content {
     display: flex;
     padding: 10px;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .logo {
     font-size: 24px;
-    display: inline-block;
     padding: 10px 0px;
     text-decoration: none;
     color: $white;
     font-family: gotham-bold;
+  }
+  
+  .header-location {
+    color: $white;
+    font-size: 14px;
+    max-width: 300px;
+
+    .locality {
+      font-family: gotham-bold;
+      position: relative;
+    }
+
+    .locality::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      background: $white;
+    }
+
+    .address {
+      margin-left: 5px;
+    }
   }
 }
