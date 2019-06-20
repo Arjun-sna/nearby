@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from './index.scss';
-import Routes from './routes';
+import App from '~/modules/app';
 
 const Index = () => (
-  <div className={styles.cb}>
-    <Routes />
-  </div>
+  <main>
+    <App />
+  </main>
 );
 
 ReactDOM.render(<Index />, document.getElementById('index'));
