@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+.navbar {
+  width: 100%;
+  background: $appColor;
+  position: fixed;
+  z-index: 2;
+
+  .nav-content {
+    display: flex;
+    padding: 10px;
+  }
+
+  .logo {
+    font-size: 24px;
+    display: inline-block;
+    padding: 10px 0px;
+    text-decoration: none;
+    color: $white;
+    font-family: gotham-bold;
+  }
+}

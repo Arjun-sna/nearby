@@ -50,6 +50,19 @@ module.exports = {
            'sass-loader',
         ],
       },
+      {
+        test: /\.(jpe?g|png|gif)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 10000
+          }
+        }]
+      },
+      {
+        test: /\.(eot|svg|ttf|woff2?|otf)$/,
+        use: 'file-loader'
+      },
     ]
   },
   plugins: [
