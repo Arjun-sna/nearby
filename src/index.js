@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '~/modules/app';
 import './styles/global.scss';
+import './initFonts';
 
 const Index = () => (
   <main>

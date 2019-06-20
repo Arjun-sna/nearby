@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LocationSelector from '~/components/locationSelector';
 import './style.scss';
 
 export default () => (
@@ -8,16 +9,7 @@ export default () => (
       <Link to="/" className="logo">
         NearBy
       </Link>
-      <div className="header-location">
-        <span>
-          <span className="locality">
-            Koramangala
-          </span>
-        </span>
-        <span className="address">
-          Hoodi Main Rd, Doddanakundi Industrial Area 2, Phase 1, Doddanekkundi, Bengaluru, Karnataka, India`
-        </span>
-      </div>
+      <LocationSelector />
     </div>
   </div>
 );

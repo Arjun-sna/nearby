@@ -20,34 +20,4 @@
     color: $white;
     font-family: gotham-bold;
   }
-  
-  .header-location {
-    display: flex;
-    color: $white;
-    font-size: 14px;
-    max-width: 300px;
-    cursor: pointer;
-
-    .locality {
-      font-family: gotham-bold;
-      position: relative;
-    }
-
-    .locality::after {
-      content: "";
-      position: absolute;
-      height: 2px;
-      left: 0;
-      bottom: -5px;
-      width: 100%;
-      background: $white;
-    }
-
-    .address {
-      margin-left: 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
 }
