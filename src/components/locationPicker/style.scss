@@ -25,7 +25,6 @@
   padding-left: 120px;
   padding-right: 40px;
   width: 522px;
-  transform: translateX(-220px);
 
   .input-wrapper {
     border: 1px solid #d4d5d9;
@@ -49,6 +48,29 @@
   }
 }
 
-.slide-in {
-  transform: translateX(0);
+.side-bar-enter {
+  opacity: 0.01;
+}
+
+.side-bar-enter.side-bar-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.side-bar-leave {
+  opacity: 1;
+}
+
+.side-bar-leave.side-bar-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.side-bar-appear {
+  transform: translateX(-100%);
+}
+
+.side-bar-appear.side-bar-appear-active {
+  transform: translateX(0%);
+  transition: transform .5s ease-in;
 }
