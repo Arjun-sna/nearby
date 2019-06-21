@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LocationSelector from '~/components/locationSelector';
+import LocationSelector from '~/components/locationView';
 import './style.scss';
 
 export default () => (

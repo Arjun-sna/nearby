@@ -17,7 +17,11 @@
     font-size: 24px;
     padding: 10px 0px;
     text-decoration: none;
-    color: $white;
+    color: $teal;
     font-family: gotham-bold;
+
+  }
+  .logo:hover {
+    color: $white;
   }
 }
