@@ -2,8 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.scss';
 
-export default () => (
-  <div className="location-picker-container">
+export default ({ setShowSideBar }) => (
+  <div className="location-picker-container" onClick={() => setShowSideBar(true)}>
     <span>
       <span className="locality">
         Koramangala
