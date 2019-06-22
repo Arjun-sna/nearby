@@ -5,12 +5,13 @@
   align-items: center;
   color: $teal;
   font-size: 14px;
-  max-width: 300px;
+  max-width: 400px;
   cursor: pointer;
 
   .locality {
     font-family: gotham-bold;
     position: relative;
+    white-space: nowrap;
   }
 
   .locality::after {

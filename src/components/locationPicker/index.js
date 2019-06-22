@@ -10,7 +10,7 @@ export default ({ setShowSideBar }) => {
   const inputRef = useRef();
   const [searchQuery, setSearchQuery] = useState('');
   const [predictedPlaces, setPredictedPlaces] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState(false);
   const [contextValue, dispatch] = useAppContext();
 
   useEffect(() => {
@@ -24,7 +24,7 @@ export default ({ setShowSideBar }) => {
       setShowSideBar(false)
     };
     
-    if (selectedLocation.length > 0) {
+    if (selectedLocation) {
       getGeoCodeForLocationDescription();
     }
   }, [selectedLocation]);

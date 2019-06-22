@@ -10,7 +10,7 @@ const PlacesListItem = ({
 }) => {
 
   return (
-    <div className="list-item-container" onClick={() => onClick && onClick(description)}>
+    <div className="list-item-container" onClick={() => onClick && onClick({description, mainText, secondaryText})}>
       <div>
         <FontAwesomeIcon icon="map-marker-alt" color="#00000099" size="sm"/>
       </div>
