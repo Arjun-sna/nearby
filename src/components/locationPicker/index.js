@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getPlacePredictionsForSearchQuery } from '~/utils';
@@ -6,9 +6,25 @@ import PlacesListItem from './predictedPlacesListItem';
 import './style.scss';
 
 export default ({ setShowSideBar }) => {
+  const inputRef = useRef();
   const [searchQuery, setSearchQuery] = useState('');
   const [predictedPlaces, setPredictedPlaces] = useState([]);
-  
+  const [selectedLocation, setSelectedLocation] = useState('');
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, [inputRef]);
+
+  useEffect(() => {
+    async function getGeoCodeForLocationDescription() {
+      console.log({selectedLocation})
+    };
+    
+    if (selectedLocation.length > 0) {
+      getGeoCodeForLocationDescription();
+    }
+  }, [selectedLocation]);
+
   useEffect(() => {
     async function fetchPlacePredictions() {
       // const predictedPlaces = await getPlacePredictionsForSearchQuery(searchQuery);
@@ -40,6 +56,7 @@ export default ({ setShowSideBar }) => {
           </div>
           <div className="input-wrapper">
             <input
+              ref={inputRef}
               className="search-input"
               placeholder="Search for area, street name..."
               value={searchQuery}
