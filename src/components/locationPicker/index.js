@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getPlacePredictionsForSearchQuery } from '~/utils';
+import { useAppContext } from '~/modules/app/contextProvider';
 import PlacesListItem from './predictedPlacesListItem';
 import './style.scss';
 
@@ -10,6 +11,7 @@ export default ({ setShowSideBar }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [predictedPlaces, setPredictedPlaces] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState('');
+  const [contextValue, dispatch] = useAppContext();
 
   useEffect(() => {
     inputRef.current.focus();
@@ -18,6 +20,7 @@ export default ({ setShowSideBar }) => {
   useEffect(() => {
     async function getGeoCodeForLocationDescription() {
       console.log({selectedLocation})
+      dispatch({ type: 'UPDATE_USER_LOCATION', payload: selectedLocation})
       setShowSideBar(false)
     };
     
