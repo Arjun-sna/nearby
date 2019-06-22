@@ -14,7 +14,6 @@ export default () => {
         {
           showSideBar && 
           <LocationPicker
-            visible={showSideBar}
             setShowSideBar={setShowSideBar} 
             />
         }
