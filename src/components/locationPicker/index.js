@@ -65,12 +65,15 @@ export default ({ setShowSideBar }) => {
           </div>
           {
             predictedPlaces.map(
-              ({ id, description, structured_formatting }) => <PlacesListItem
+              ({ id, description, structured_formatting }) => (
+                <PlacesListItem
                   key={id}
                   description={description}
                   mainText={structured_formatting.main_text}
                   secondaryText={structured_formatting.secondary_text}
+                  onClick={setSelectedLocation}
                 />
+              )
             )
           }
         </div>
