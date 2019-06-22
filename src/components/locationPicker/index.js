@@ -18,6 +18,7 @@ export default ({ setShowSideBar }) => {
   useEffect(() => {
     async function getGeoCodeForLocationDescription() {
       console.log({selectedLocation})
+      setShowSideBar(false)
     };
     
     if (selectedLocation.length > 0) {
