@@ -1,6 +1,7 @@
 import { create } from 'apisauce';
 
 const URL_ROOT = 'https://developers.zomato.com/api/v2.1';
+const { RESTAURANT_API_KEY } = process.env;
 
 class ApiService {
   constructor() {
@@ -10,15 +11,16 @@ class ApiService {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
+        'user-key': RESTAURANT_API_KEY,
       },
     });
 
-    if (__DEV__) {
+    if (process.env.NODE_ENV === 'development') {
       this.request.addMonitor(console.log);
     }
   }
 
-  sendGet = async (path, params) => {
+  sendGet = async (path, params = {}) => {
     const response = await this.request.get(path, params);
 
     return response.ok ? response.data : null;
@@ -29,6 +31,8 @@ class ApiService {
     
     return response.ok ? response.data : null;
   }
+
+  getRestaurantCategories = () => this.sendGet('/categories');
 }
 
 export default new ApiService();

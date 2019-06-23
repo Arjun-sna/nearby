@@ -3,7 +3,7 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 const render = Comp => props => (<Comp {...props} />);
 const Dashboard = render(lazy(() => import('../../components/Dashboard')));
-const Home = render(lazy(() => import('../../components/Home')));
+const Home = render(lazy(() => import('~/modules/home')));
 
 const Routes = () => (
   <div>
