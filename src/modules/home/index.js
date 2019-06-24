@@ -10,7 +10,7 @@ const Home = () => {
     }
 
     getRestaurantCategories();
-  });
+  }, []);
 
   return (
     <div>
