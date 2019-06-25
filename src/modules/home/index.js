@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ApiService from '~/utils/apiService';
 
 const Home = () => {
+  const [categories, setCategories] = useState([]);
+  
   useEffect(() => {
     async function getRestaurantCategories() {
       const restaurantCategories = await ApiService.getRestaurantCategories();
-      console.log(restaurantCategories);
+      setCategories(restaurantCategories.categories)
     }
 
     getRestaurantCategories();
@@ -15,7 +17,7 @@ const Home = () => {
   return (
     <div>
       <p>Home</p>
-      <Link to="/dashboard">Dashboard</Link>
+      <Link to="/dashboard">{categories.length}</Link>
     </div>
   )
 };
