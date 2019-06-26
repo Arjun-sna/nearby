@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ApiService from '~/utils/apiService';
+import CategoryItem from '~/components/categoryItem';
+import './styles.scss';
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
@@ -8,7 +10,8 @@ const Home = () => {
   useEffect(() => {
     async function getRestaurantCategories() {
       const restaurantCategories = await ApiService.getRestaurantCategories();
-      setCategories(restaurantCategories.categories)
+      console.log(restaurantCategories.categories.map(category => category.categories))
+      setCategories(restaurantCategories.categories.map(category => category.categories))
     }
 
     getRestaurantCategories();
@@ -16,8 +19,11 @@ const Home = () => {
 
   return (
     <div>
-      <p>Home</p>
-      <Link to="/dashboard">{categories.length}</Link>
+      <div className="category-list">
+      {
+        categories.map(category => <CategoryItem key={category.id} category={category} />)
+      }
+      </div>
     </div>
   )
 };

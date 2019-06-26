@@ -26,7 +26,7 @@ const PlacesListItem = ({
   )
 }
 
-PlacesListItem.prototype = {
+PlacesListItem.propTypes = {
   description: PropTypes.string,
   mainText: PropTypes.string,
   secondaryText: PropTypes.string,

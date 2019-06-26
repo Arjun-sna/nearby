@@ -1,0 +1,11 @@
+.category-list-item-container {
+  padding: 10px;
+  flex: 1;
+  white-space: nowrap;
+  margin: 0 5px;
+  border-radius: 5px;
+
+  .category-name {
+    font-family: gotham-bold;
+  }
+}
