@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoriesBar from './components/categoriesBar';
+import CategoriesBar from './components/CategoriesBar';
 import './styles.scss';
 
 const Home = () => {

@@ -5,8 +5,8 @@ import './styles.scss';
 
 const CategoryItem = ({ category }) => {
   const { id, name, onPress} = category;
-const gradient = generateRandomGradient();
-console.log({gradient})
+  const gradient = generateRandomGradient();
+
   return (
     <div className="category-list-item-container" style={{ background: gradient }}>
       <span className="category-name">{name}</span>

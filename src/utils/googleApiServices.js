@@ -12,7 +12,7 @@ export const getPlacePredictionsForSearchQuery =  async (searchQuery) => {
       `${GOOGLE_API_BASE_URL}/place/autocomplete/json?`,
       { params: queryParams }
     );
-  console.log(placesResponse)
+
   if (placesResponse.status === 200) {
     return placesResponse.data && placesResponse.data.predictions;
   }
