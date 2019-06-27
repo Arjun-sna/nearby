@@ -1,14 +1,64 @@
+@import '../../styles/variables';
+
 .restaurant-list-item-container {
+  display: flex;
   box-shadow: 0 10px 10px -16px rgba(#7f8c8d, 1);
   background: white;
   margin: 10px;
-  .restaurant-list-item-cover-img {
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 10px 10px -10px rgba(#7f8c8d, 1);
+  }
+
+  .restaurant-list-item-detail-container {
     display: flex;
+    align-items: space-between;
+    flex-direction: column;
+  }
+
+  .restaurant-list-item-cover-img {
     align-items: center;
+    display: flex;
     padding: 10px;
+
     img {
       max-width: 100px;
       border-radius: 5px;
     }
+  }
+
+  .restaurant-list-item-name {
+    font-family: gotham-bold;
+    color: $appColor;
+    font-size: 18px;
+    position: relative;
+    margin: 2px 0;
+  }
+
+  .restaurant-detail-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 3px 0;
+  }
+
+  .restaurant-list-item-cuisines {
+    color: $black60;
+    font-size: 12px;
+    margin: 0 5px;
+  }
+
+  .restaurant-list-item-timings {
+    color: $black60;
+    font-size: 12px;
+    margin: 0 5px;
+  }
+
+  .restaurant-list-item-cost {
+    color: $black60;
+    font-size: 12px;
+    margin: 0 5px;
   }
 }
