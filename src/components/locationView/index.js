@@ -4,7 +4,7 @@ import { useAppContext } from '~/modules/app/contextProvider';
 import './style.scss';
 
 export default ({ setShowSideBar }) => {
-  const [ appContextValue ] = useAppContext();
+  const [appContextValue] = useAppContext();
   const { userLocation: { mainText, secondaryText } = {} } = appContextValue;
 
   return (
@@ -18,10 +18,10 @@ export default ({ setShowSideBar }) => {
         { secondaryText }
       </span>
       <span>
-      <span className="address-icon">
-        <FontAwesomeIcon icon="angle-down" size="1x"/>
-      </span>
+        <span className="address-icon">
+          <FontAwesomeIcon icon="angle-down" size="1x" />
+        </span>
       </span>
     </div>
-  )
+  );
 };

@@ -19,13 +19,13 @@ export default ({ setShowSideBar }) => {
 
   useEffect(() => {
     async function getGeoCodeForLocationDescription() {
-      const geoCodeData = await geoCodeLocation(selectedLocation.description)
+      const geoCodeData = await geoCodeLocation(selectedLocation.description);
       // TODO: handle error with a toast
       const locationData = { ...selectedLocation, ...geoCodeData };
-      dispatch({ type: 'UPDATE_USER_LOCATION', payload: locationData})
-      setShowSideBar(false)
-    };
-    
+      dispatch({ type: 'UPDATE_USER_LOCATION', payload: locationData });
+      setShowSideBar(false);
+    }
+
     if (selectedLocation) {
       getGeoCodeForLocationDescription();
     }
@@ -38,8 +38,8 @@ export default ({ setShowSideBar }) => {
       setPredictedPlaces(predictedPlaces);
     }
     let deferTimeout;
-    
-    if (searchQuery.length > 2) {      
+
+    if (searchQuery.length > 2) {
       deferTimeout = setTimeout(fetchPlacePredictions, 1000);
     }
 
@@ -48,17 +48,17 @@ export default ({ setShowSideBar }) => {
 
   return (
     <React.Fragment>
-      <div className="overlay-container" onClick={() => setShowSideBar(false)}/>
+      <div className="overlay-container" onClick={() => setShowSideBar(false)} />
       <CSSTransitionGroup
         transitionName="side-bar"
-        transitionAppear={true}
+        transitionAppear
         transitionAppearTimeout={3000}
         transitionEnterTimeout={100}
         transitionLeaveTimeout={300}
       >
         <div key="location-picker-side-bar" className="side-bar-container">
           <div className="close-button-wrapper" onClick={() => setShowSideBar(false)}>
-            <FontAwesomeIcon className="close-button" icon="window-close" size="1x"/>
+            <FontAwesomeIcon className="close-button" icon="window-close" size="1x" />
           </div>
           <div className="input-wrapper">
             <input
@@ -66,24 +66,22 @@ export default ({ setShowSideBar }) => {
               className="search-input"
               placeholder="Search for area, street name..."
               value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
+              onChange={event => setSearchQuery(event.target.value)}
             />
           </div>
           {
-            predictedPlaces.map(
-              ({ id, description, structured_formatting }) => (
-                <PlacesListItem
-                  key={id}
-                  description={description}
-                  mainText={structured_formatting.main_text}
-                  secondaryText={structured_formatting.secondary_text}
-                  onClick={setSelectedLocation}
-                />
-              )
-            )
+            predictedPlaces.map(({ id, description, structured_formatting }) => (
+              <PlacesListItem
+                key={id}
+                description={description}
+                mainText={structured_formatting.main_text}
+                secondaryText={structured_formatting.secondary_text}
+                onClick={setSelectedLocation}
+              />
+              ))
           }
         </div>
       </CSSTransitionGroup>
     </React.Fragment>
-  )
-}
+  );
+};

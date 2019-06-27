@@ -23,31 +23,29 @@ const RestaurantList = ({ filters }) => {
   const params = {
     ...filters,
     ...locationFilter,
-  }
+  };
 
   useEffect(() => {
     async function fetchFromAPI() {
       setIsRequestInProgress(true);
       const apiResponseData = await ApiService.getAllRestaurants(params);
       setIsRequestInProgress(false);
-      setRestaurantList(apiResponseData.restaurants.map(({ restaurant }) => restaurant))
+      setRestaurantList(apiResponseData.restaurants.map(({ restaurant }) => restaurant));
     }
 
     fetchFromAPI();
   }, [startFromOffset, appContextValue]);
 
   if (isRequestInProgress) {
-    return <Loader />
+    return <Loader />;
   }
   return (
     <div className="restaurant-list-container">
-      {  
-        restaurantList.map(
-          restaurant => <RestaurantListItem key={restaurant.id} restaurantData={restaurant}/>
-        )
+      {
+        restaurantList.map(restaurant => <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />)
       }
     </div>
-  )
-}
+  );
+};
 
 export default RestaurantList;

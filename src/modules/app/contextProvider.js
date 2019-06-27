@@ -10,8 +10,8 @@ const AppContextProvider = ({ children }) => {
     <AppDataContext.Provider value={contextValue}>
       {children}
     </AppDataContext.Provider>
-  )
-}
+  );
+};
 
 export const useAppContext = () => {
   const appContextValue = useContext(AppDataContext);

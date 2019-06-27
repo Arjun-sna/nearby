@@ -1,8 +1,8 @@
 {
-  "name": "boilerplate",
+  "name": "nearby",
   "sideEffects": false,
   "version": "1.0.0",
-  "description": "React Boiler Plate",
+  "description": "Search restaurants nearby using Zomato API",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",

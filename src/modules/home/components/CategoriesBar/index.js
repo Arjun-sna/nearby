@@ -5,8 +5,8 @@ import { useLoadDataFromAPI } from '~/modules/home/loadDataEffect';
 import './styles.scss';
 
 const CategoriesBar = () => {
-  const [isLoadingCategories, apiData] = useLoadDataFromAPI('/categories')
-  const categories = apiData ? apiData.categories.map(category => category.categories) : []
+  const [isLoadingCategories, apiData] = useLoadDataFromAPI('/categories');
+  const categories = apiData ? apiData.categories.map(category => category.categories) : [];
 
   return (
     <div className="category-list">
@@ -15,7 +15,7 @@ const CategoriesBar = () => {
         categories.map(category => <CategoryItem key={category.id} category={category} />)
       }
     </div>
-  )
-}
+  );
+};
 
 export default CategoriesBar;

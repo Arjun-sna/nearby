@@ -10,7 +10,7 @@ export function useLoadDataFromAPI(apiPath, params = {}) {
       setIsRequestInProgress(true);
       const apiResponseData = await ApiService.sendGet(apiPath, params);
       setIsRequestInProgress(false);
-      setApiData(apiResponseData)
+      setApiData(apiResponseData);
     }
 
     fetchFromAPI();

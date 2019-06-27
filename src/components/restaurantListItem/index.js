@@ -10,18 +10,18 @@ const RestaurantListItem = ({ restaurantData }) => {
     average_cost_for_two,
     timings,
   } = restaurantData;
-  
+
   return (
     <div className="restaurant-list-item-container">
       <div className="restaurant-list-item-cover-img">
-        <img src={thumb} alt="restaurant cover"/>
+        <img src={thumb} alt="restaurant cover" />
       </div>
       <div className="restaurant-list-item-detail-container">
         <div className="restaurant-list-item-name">{name}</div>
         {
-          cuisines && 
+          cuisines &&
           <div className="restaurant-detail-wrapper">
-            <FontAwesomeIcon icon="utensils" size="xs" color="#00000099"  />
+            <FontAwesomeIcon icon="utensils" size="xs" color="#00000099" />
             <div className="restaurant-list-item-cuisines">
               {cuisines}
             </div>
@@ -41,7 +41,7 @@ const RestaurantListItem = ({ restaurantData }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default RestaurantListItem;

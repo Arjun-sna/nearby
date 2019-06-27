@@ -4,14 +4,14 @@ import { generateRandomGradient } from '~/utils';
 import './styles.scss';
 
 const CategoryItem = ({ category }) => {
-  const { id, name, onPress} = category;
+  const { id, name, onPress } = category;
   const gradient = generateRandomGradient();
 
   return (
     <div className="category-list-item-container" style={{ background: gradient }}>
       <span className="category-name">{name}</span>
     </div>
-  )
+  );
 };
 
 CategoryItem.propTypes = {
@@ -24,6 +24,6 @@ CategoryItem.propTypes = {
 
 CategoryItem.defaultProps = {
   onPress: () => {},
-}
+};
 
 export default CategoryItem;

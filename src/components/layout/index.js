@@ -4,7 +4,7 @@ import './style.scss';
 
 export default ({ children, setShowSideBar }) => (
   <React.Fragment>
-    <Navbar setShowSideBar={setShowSideBar}/>
+    <Navbar setShowSideBar={setShowSideBar} />
     <div className="main container">
       { children }
     </div>

@@ -26,15 +26,15 @@ class ApiService {
     return response.ok ? response.data : null;
   }
 
-  sendPost = async(path, body) => {
+  sendPost = async (path, body) => {
     const response = await this.request.post(path, body);
-    
+
     return response.ok ? response.data : null;
   }
 
   getRestaurantCategories = () => this.sendGet('/categories');
 
-  getAllRestaurants = (params) => this.sendGet('/search', params);
+  getAllRestaurants = params => this.sendGet('/search', params);
 }
 
 export default new ApiService();
