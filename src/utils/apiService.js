@@ -34,7 +34,7 @@ class ApiService {
 
   getRestaurantCategories = () => this.sendGet('/categories');
 
-  getAllRestaurants = (lat, lng) => this.sendGet('/search', { lat, lng, radius: 3000 })
+  getAllRestaurants = (params) => this.sendGet('/search', params);
 }
 
 export default new ApiService();
