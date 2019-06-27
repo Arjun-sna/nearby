@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Layout from '~/components/layout';
 import LocationPicker from '~/components/locationPicker'; 
@@ -7,6 +7,11 @@ import AppContextProvider from './contextProvider';
 
 export default () => {
   const [showSideBar, setShowSideBar] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSideBar(true);
+    }, 2000);
+  }, [])
 
   return (
     <AppContextProvider>

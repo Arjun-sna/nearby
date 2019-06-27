@@ -11,8 +11,7 @@ const RestaurantList = ({ filters }) => {
   const [isRequestInProgress, setIsRequestInProgress] = useState(false);
   const [appContextValue] = useAppContext();
   const { userLocation: { latitude, longitude } = {} } = appContextValue;
-  const params = {
-    ...filters,
+  const locationFilter = latitude && longitude ? {
     lat: latitude,
     lon: longitude,
     radius: 3000,
@@ -20,6 +19,10 @@ const RestaurantList = ({ filters }) => {
     order: 'asc',
     start: startFromOffset,
     count: 30,
+  } : {};
+  const params = {
+    ...filters,
+    ...locationFilter,
   }
 
   useEffect(() => {
