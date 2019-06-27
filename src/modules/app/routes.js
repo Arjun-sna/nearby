@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, Route, Redirect, BrowserRouter as Router } from 'react-router-dom';
 
 const render = Comp => props => (<Comp {...props} />);
 const Dashboard = render(lazy(() => import('../../components/Dashboard')));
@@ -10,7 +10,8 @@ const Routes = () => (
     <Suspense fallback={<div>loading...</div>}>
       <Router>
         <Switch>
-          <Route path="/" component={Home} exact />
+          <Redirect exact from="/" to="/all" />
+          <Route path="/all" component={Home} exact />
           <Route path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
