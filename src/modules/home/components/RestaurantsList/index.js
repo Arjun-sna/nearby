@@ -2,14 +2,22 @@ import React, { useState, useEffect } from 'react';
 import ApiService from '~/utils/apiService';
 import Loader from '~/components/loader';
 import RestaurantListItem from '~/components/restaurantListItem';
+import { useAppContext } from '~/modules/app/contextProvider';
 import './styles.scss';
 
 const RestaurantList = ({ filters }) => {
   const [startFromOffset, setStartFromOffset] = useState(0);
   const [restaurantList, setRestaurantList] = useState([]);
   const [isRequestInProgress, setIsRequestInProgress] = useState(false);
+  const [appContextValue] = useAppContext();
+  const { userLocation: { latitude, longitude } = {} } = appContextValue;
   const params = {
     ...filters,
+    lat: latitude,
+    lon: longitude,
+    radius: 3000,
+    sort: 'real_distance',
+    order: 'asc',
     start: startFromOffset,
     count: 30,
   }
@@ -23,7 +31,7 @@ const RestaurantList = ({ filters }) => {
     }
 
     fetchFromAPI();
-  }, [startFromOffset]);
+  }, [startFromOffset, appContextValue]);
 
   if (isRequestInProgress) {
     return <Loader />
