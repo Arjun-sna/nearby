@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '~/utils/apiService';
 import Loader from '~/components/loader';
+import RestaurantListItem from '~/components/restaurantListItem';
+import './styles.scss';
 
 const RestaurantList = ({ filters }) => {
   const [startFromOffset, setStartFromOffset] = useState(0);
@@ -23,11 +25,15 @@ const RestaurantList = ({ filters }) => {
     fetchFromAPI();
   }, [startFromOffset]);
 
+  if (isRequestInProgress) {
+    return <Loader />
+  }
   return (
-    <div>
-      {
-        (isRequestInProgress) ? <Loader /> :
-        restaurantList.map(restaurant => <div><p>{restaurant.name}</p></div>)
+    <div className="restaurant-list-container">
+      {  
+        restaurantList.map(
+          restaurant => <RestaurantListItem key={restaurant.id} restaurantData={restaurant}/>
+        )
       }
     </div>
   )

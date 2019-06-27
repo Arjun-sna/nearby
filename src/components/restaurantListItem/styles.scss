@@ -1,0 +1,14 @@
+.restaurant-list-item-container {
+  box-shadow: 0 10px 10px -16px rgba(#7f8c8d, 1);
+  background: white;
+  margin: 10px;
+  .restaurant-list-item-cover-img {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    img {
+      max-width: 100px;
+      border-radius: 5px;
+    }
+  }
+}
