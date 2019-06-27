@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getPlacePredictionsForSearchQuery } from '~/utils';
+import { getPlacePredictionsForSearchQuery, geoCodeLocation } from '~/utils';
 import { useAppContext } from '~/modules/app/contextProvider';
 import PlacesListItem from './predictedPlacesListItem';
 import './style.scss';
@@ -20,7 +20,10 @@ export default ({ setShowSideBar }) => {
   useEffect(() => {
     async function getGeoCodeForLocationDescription() {
       console.log({selectedLocation})
-      dispatch({ type: 'UPDATE_USER_LOCATION', payload: selectedLocation})
+      const geoCodeData = await geoCodeLocation(selectedLocation.description)
+      // TODO: handle error with a toast
+      const locationData = { ...selectedLocation, ...geoCodeData };
+      dispatch({ type: 'UPDATE_USER_LOCATION', payload: locationData})
       setShowSideBar(false)
     };
     
