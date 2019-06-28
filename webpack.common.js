@@ -14,6 +14,7 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 module.exports = {
   output:{
     path: path.join(__dirname,'/dist'),
+    publicPath: '/',
     filename:'[name].[hash].js'
   },
   module: {
@@ -45,7 +46,7 @@ module.exports = {
       {
         test: /\.s?[ac]ss$/,
         use: [
-           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+           MiniCssExtractPlugin.loader,
            'css-loader',
            'sass-loader',
         ],

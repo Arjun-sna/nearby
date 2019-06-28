@@ -3,6 +3,7 @@
   "plugins": [
     "babel-plugin-transform-class-properties",
     "dynamic-import-webpack",
+    "@babel/plugin-transform-modules-commonjs",
     [
       "module-resolver",
       {
