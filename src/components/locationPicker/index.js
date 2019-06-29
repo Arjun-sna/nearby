@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Script from 'react-load-script';
+import PlacesAutoComplete from 'react-places-autocomplete';
 import { getPlacePredictionsForSearchQuery, geoCodeLocation } from '~/utils';
 import { useAppContext } from '~/modules/app/contextProvider';
 import PlacesListItem from './predictedPlacesListItem';
@@ -8,14 +10,15 @@ import './style.scss';
 
 export default ({ setShowSideBar }) => {
   const inputRef = useRef();
+  const [isGoogleLibraryScriptLoaded, setGoogleLibraryScriptLoaded] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [predictedPlaces, setPredictedPlaces] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(false);
   const [contextValue, dispatch] = useAppContext();
 
   useEffect(() => {
-    inputRef.current.focus();
-  }, [inputRef]);
+    inputRef.current && inputRef.current.focus();
+  }, [isGoogleLibraryScriptLoaded]);
 
   useEffect(() => {
     async function getGeoCodeForLocationDescription() {
@@ -45,9 +48,14 @@ export default ({ setShowSideBar }) => {
 
     return () => clearTimeout(deferTimeout);
   }, [searchQuery]);
+  const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places`
+  const handleScriptLoad = () => setGoogleLibraryScriptLoaded(true);
 
-  return (
+   return (
     <React.Fragment>
+      <Script url={scriptUrl}
+        onLoad={handleScriptLoad}        
+      /> 
       <div className="overlay-container" onClick={() => setShowSideBar(false)} />
       <CSSTransitionGroup
         transitionName="side-bar"
@@ -60,7 +68,7 @@ export default ({ setShowSideBar }) => {
           <div className="close-button-wrapper" onClick={() => setShowSideBar(false)}>
             <FontAwesomeIcon className="close-button" icon="window-close" size="1x" />
           </div>
-          <div className="input-wrapper">
+          {/* <div className="input-wrapper">
             <input
               ref={inputRef}
               className="search-input"
@@ -68,8 +76,8 @@ export default ({ setShowSideBar }) => {
               value={searchQuery}
               onChange={event => setSearchQuery(event.target.value)}
             />
-          </div>
-          {
+          </div> */}
+          {/* {
             predictedPlaces.map(({ id, description, structured_formatting }) => (
               <PlacesListItem
                 key={id}
@@ -79,6 +87,31 @@ export default ({ setShowSideBar }) => {
                 onClick={setSelectedLocation}
               />
               ))
+          } */}
+          {
+            isGoogleLibraryScriptLoaded && 
+            <PlacesAutoComplete
+              value={searchQuery}
+              onChange={event => setSearchQuery(event.target.value)}
+            >
+              {
+                ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                  <div>
+                    <div className="input-wrapper">
+                      <input
+                        ref={inputRef}
+                        {
+                          ...getInputProps({
+                            className: "search-input",
+                            placeholder: "Search for area, street name..."
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                )
+              }
+            </PlacesAutoComplete>
           }
         </div>
       </CSSTransitionGroup>
