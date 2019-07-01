@@ -3,6 +3,7 @@ import ApiService from '~/utils/apiService';
 import LazyLoad from 'react-lazyload';
 import Loader from '~/components/loader';
 import RestaurantListItem from '~/components/restaurantListItem';
+import EndOfListLabel from '~/components/endOfListLabel';
 import { useAppContext } from '~/modules/app/contextProvider';
 import useScrolledToEndListener from '~/modules/home/useScrolledToEndListener';
 import './styles.scss';
@@ -34,11 +35,13 @@ const RestaurantList = ({ filters }) => {
   useEffect(() => {
     async function fetchFromAPI() {
       setIsRequestInProgress(true);
+      
       const apiResponseData = await ApiService.getAllRestaurants(params);
-      setIsRequestInProgress(false);
       const nextRestaurantList = apiResponseData.restaurants.map(({ restaurant }) => restaurant);
+      
       nextRestaurantList.length ?
         setRestaurantList(restaurantList.concat(nextRestaurantList)) : setHasMoreData(false);
+      setIsRequestInProgress(false);
     }
 
     fetchFromAPI();
@@ -57,7 +60,7 @@ const RestaurantList = ({ filters }) => {
         ))
       }
       {
-        isRequestInProgress && <Loader />
+        hasMoreData ? <Loader /> : <EndOfListLabel />
       }
     </div>
   );
