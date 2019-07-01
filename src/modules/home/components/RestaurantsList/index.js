@@ -26,6 +26,9 @@ const RestaurantList = ({ filters }) => {
     ...filters,
     ...locationFilter,
   };
+  const scrollEndCallback = useCallback(() => {
+    !isRequestInProgress && setStartFromOffset(startFromOffset + 20)
+  }, [startFromOffset, isRequestInProgress]);
 
   useEffect(() => {
     async function fetchFromAPI() {
@@ -37,13 +40,10 @@ const RestaurantList = ({ filters }) => {
 
     fetchFromAPI();
   }, [startFromOffset, appContextValue]);
-  const scrollEndCallback = useCallback(() => {console.log({startFromOffset}); setStartFromOffset(startFromOffset + 20)}, [startFromOffset]);
+  
 
   useScrolledToEndListener(scrollEndCallback);
 
-  // if (isRequestInProgress) {
-  //   return <Loader />;
-  // }
   return (
     <div className="restaurant-list-container">
       {
@@ -52,6 +52,9 @@ const RestaurantList = ({ filters }) => {
             <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />
           </LazyLoad>
         ))
+      }
+      {
+        isRequestInProgress && <Loader />
       }
     </div>
   );
