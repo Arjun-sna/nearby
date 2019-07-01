@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ApiService from '~/utils/apiService';
+import LazyLoad from 'react-lazyload';
 import Loader from '~/components/loader';
 import RestaurantListItem from '~/components/restaurantListItem';
 import { useAppContext } from '~/modules/app/contextProvider';
@@ -42,7 +43,11 @@ const RestaurantList = ({ filters }) => {
   return (
     <div className="restaurant-list-container">
       {
-        restaurantList.map(restaurant => <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />)
+        restaurantList.map(restaurant => (
+          <LazyLoad>
+            <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />
+          </LazyLoad>
+        ))
       }
     </div>
   );
