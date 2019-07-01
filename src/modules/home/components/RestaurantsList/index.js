@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ApiService from '~/utils/apiService';
 import LazyLoad from 'react-lazyload';
 import Loader from '~/components/loader';
 import RestaurantListItem from '~/components/restaurantListItem';
 import { useAppContext } from '~/modules/app/contextProvider';
+import useScrolledToEndListener from '~/modules/home/useScrolledToEndListener';
 import './styles.scss';
 
 const RestaurantList = ({ filters }) => {
@@ -31,20 +32,23 @@ const RestaurantList = ({ filters }) => {
       setIsRequestInProgress(true);
       const apiResponseData = await ApiService.getAllRestaurants(params);
       setIsRequestInProgress(false);
-      setRestaurantList(apiResponseData.restaurants.map(({ restaurant }) => restaurant));
+      setRestaurantList(restaurantList.concat(apiResponseData.restaurants.map(({ restaurant }) => restaurant)));
     }
 
     fetchFromAPI();
   }, [startFromOffset, appContextValue]);
+  const scrollEndCallback = useCallback(() => {console.log({startFromOffset}); setStartFromOffset(startFromOffset + 20)}, [startFromOffset]);
 
-  if (isRequestInProgress) {
-    return <Loader />;
-  }
+  useScrolledToEndListener(scrollEndCallback);
+
+  // if (isRequestInProgress) {
+  //   return <Loader />;
+  // }
   return (
     <div className="restaurant-list-container">
       {
         restaurantList.map(restaurant => (
-          <LazyLoad>
+          <LazyLoad key={restaurant.id} height={150} >
             <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />
           </LazyLoad>
         ))
