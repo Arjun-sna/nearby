@@ -9,7 +9,7 @@ import useScrolledToEndListener from '~/modules/home/useScrolledToEndListener';
 import './styles.scss';
 
 const RestaurantList = ({ filters }) => {
-  const [startFromOffset, setStartFromOffset] = useState(0);
+  const [startFromOffset, setStartFromOffset] = useState(null);
   const [restaurantList, setRestaurantList] = useState([]);
   const [isRequestInProgress, setIsRequestInProgress] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
@@ -31,24 +31,40 @@ const RestaurantList = ({ filters }) => {
   const scrollEndCallback = useCallback(() => {
     (!isRequestInProgress && hasMoreData) && setStartFromOffset(startFromOffset + 20)
   }, [startFromOffset, isRequestInProgress, hasMoreData]);
+  
+  useEffect(() => {
+    if (latitude && longitude) {
+      setRestaurantList([]);
+      setHasMoreData(true);
+      setStartFromOffset(0)
+    }
+  }, [latitude, longitude]);
 
   useEffect(() => {
     async function fetchFromAPI() {
-      setIsRequestInProgress(true);
-      
-      const apiResponseData = await ApiService.getAllRestaurants(params);
-      const nextRestaurantList = apiResponseData.restaurants.map(({ restaurant }) => restaurant);
-      
-      nextRestaurantList.length ?
-        setRestaurantList(restaurantList.concat(nextRestaurantList)) : setHasMoreData(false);
-      setIsRequestInProgress(false);
+      if (latitude && longitude) {
+        setIsRequestInProgress(true);
+        
+        const apiResponseData = await ApiService.getAllRestaurants(params);
+        const nextRestaurantList = apiResponseData.restaurants.map(({ restaurant }) => restaurant);
+        
+        nextRestaurantList.length ?
+          setRestaurantList(restaurantList.concat(nextRestaurantList)) : setHasMoreData(false);
+        setIsRequestInProgress(false);
+      }
     }
 
     fetchFromAPI();
-  }, [startFromOffset, appContextValue]);
+  }, [startFromOffset]);
   
 
   useScrolledToEndListener(scrollEndCallback);
+
+  if (startFromOffset === null) {
+    return (
+      <EndOfListLabel label='Please choose a location to find all restaurants'/>
+    )
+  }
 
   return (
     <React.Fragment>

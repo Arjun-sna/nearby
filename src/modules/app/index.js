@@ -10,7 +10,7 @@ export default () => {
   useEffect(() => {
     setTimeout(() => {
       setShowSideBar(true);
-    }, 2000);
+    }, 500);
   }, []);
 
   return (
