@@ -51,18 +51,22 @@ const RestaurantList = ({ filters }) => {
   useScrolledToEndListener(scrollEndCallback);
 
   return (
-    <div className="restaurant-list-container">
-      {
-        restaurantList.map(restaurant => (
-          <LazyLoad key={restaurant.id} height={150} >
-            <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />
-          </LazyLoad>
-        ))
-      }
-      {
-        hasMoreData ? <Loader /> : <EndOfListLabel />
-      }
-    </div>
+    <React.Fragment>
+      <div className="restaurant-list-container">
+        {
+          restaurantList.map(restaurant => (
+            <LazyLoad key={restaurant.id} height={150} >
+              <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />
+            </LazyLoad>
+          ))
+        }
+      </div>
+      <div>
+        {
+          hasMoreData ? <Loader /> : <EndOfListLabel />
+        }
+      </div>
+    </React.Fragment>
   );
 };
 
