@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import ApiService from '~/utils/apiService';
 import LazyLoad from 'react-lazyload';
 import Loader from '~/components/loader';
@@ -6,27 +6,20 @@ import RestaurantListItem from '~/components/restaurantListItem';
 import EndOfListLabel from '~/components/endOfListLabel';
 import { useAppContext } from '~/modules/app/contextProvider';
 import useScrolledToEndListener from '~/modules/home/useScrolledToEndListener';
+import { updateRestaurantList, updateHasMoreData } from 'action-creators';
 import './styles.scss';
 
 const RestaurantList = ({ filters }) => {
-  const [startFromOffset, setStartFromOffset] = useState(0);
-  const [restaurantList, setRestaurantList] = useState([]);
+  const isMounted = useRef();
   const [isRequestInProgress, setIsRequestInProgress] = useState(false);
-  const [hasMoreData, setHasMoreData] = useState(true);
-  const [appContextValue] = useAppContext();
-  const { userLocation: { latitude, longitude } = {} } = appContextValue;
-  
+  const [appContextValue, dispatch] = useAppContext();
+  const {
+    userLocation: { latitude, longitude } = {},
+    restaurantListData: { restaurantList, startFromOffset, hasMoreData }
+  } = appContextValue;
   const scrollEndCallback = useCallback(() => {
-    (!isRequestInProgress && hasMoreData) && setStartFromOffset(startFromOffset + 20);
+    (!isRequestInProgress && hasMoreData) && dispatch(updateRestaurantList(restaurantList, startFromOffset + 20));
   }, [startFromOffset, isRequestInProgress, hasMoreData]);
-  
-  useEffect(() => {
-    if (latitude && longitude) {
-      setRestaurantList([]);
-      setHasMoreData(true);
-      setStartFromOffset(0);
-    }
-  }, [latitude, longitude]);
   
   const params = useMemo(() => ({
     ...filters,
@@ -37,12 +30,16 @@ const RestaurantList = ({ filters }) => {
       sort: 'real_distance',
       order: 'asc',
       start: startFromOffset,
-      count: 30,
+      count: 20,
     }: {},
   }), [latitude, longitude, startFromOffset, filters]);
 
   useEffect(() => {
     async function fetchFromAPI() {
+      if (!isMounted.current) {
+        isMounted.current = true;
+        return;
+      }
       if (latitude && longitude) {
         setIsRequestInProgress(true);
 
@@ -50,11 +47,11 @@ const RestaurantList = ({ filters }) => {
         const nextRestaurantList = apiResponseData.restaurants.map(({ restaurant }) => restaurant);
 
         nextRestaurantList.length ?
-          setRestaurantList(restaurantList.concat(nextRestaurantList)) : setHasMoreData(false);
+          dispatch(updateRestaurantList(restaurantList.concat(nextRestaurantList), startFromOffset)) :
+          dispatch(updateHasMoreData(false));
         setIsRequestInProgress(false);
       }
     }
-
     fetchFromAPI();
   }, [params]);
   
