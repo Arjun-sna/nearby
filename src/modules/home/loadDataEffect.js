@@ -14,7 +14,7 @@ export function useLoadDataFromAPI(apiPath, params = {}) {
     }
 
     fetchFromAPI();
-  }, [apiPath, params]);
+  }, []);
 
   return [isRequestInProgress, apiData];
 }

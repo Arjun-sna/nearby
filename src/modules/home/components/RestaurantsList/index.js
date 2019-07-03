@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import ApiService from '~/utils/apiService';
 import LazyLoad from 'react-lazyload';
 import Loader from '~/components/loader';
@@ -9,29 +9,17 @@ import useScrolledToEndListener from '~/modules/home/useScrolledToEndListener';
 import './styles.scss';
 
 const RestaurantList = ({ filters }) => {
-  const [startFromOffset, setStartFromOffset] = useState(null);
+  const [startFromOffset, setStartFromOffset] = useState(0);
   const [restaurantList, setRestaurantList] = useState([]);
   const [isRequestInProgress, setIsRequestInProgress] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
   const [appContextValue] = useAppContext();
   const { userLocation: { latitude, longitude } = {} } = appContextValue;
-  const locationFilter = latitude && longitude ? {
-    lat: latitude,
-    lon: longitude,
-    radius: 3000,
-    sort: 'real_distance',
-    order: 'asc',
-    start: startFromOffset,
-    count: 30,
-  } : {};
-  const params = {
-    ...filters,
-    ...locationFilter,
-  };
+  
   const scrollEndCallback = useCallback(() => {
     (!isRequestInProgress && hasMoreData) && setStartFromOffset(startFromOffset + 20);
   }, [startFromOffset, isRequestInProgress, hasMoreData]);
-
+  
   useEffect(() => {
     if (latitude && longitude) {
       setRestaurantList([]);
@@ -39,6 +27,19 @@ const RestaurantList = ({ filters }) => {
       setStartFromOffset(0);
     }
   }, [latitude, longitude]);
+  
+  const params = useMemo(() => ({
+    ...filters,
+    ...latitude && longitude ? {
+      lat: latitude,
+      lon: longitude,
+      radius: 3000,
+      sort: 'real_distance',
+      order: 'asc',
+      start: startFromOffset,
+      count: 30,
+    }: {},
+  }), [latitude, longitude, startFromOffset, filters]);
 
   useEffect(() => {
     async function fetchFromAPI() {
@@ -55,12 +56,11 @@ const RestaurantList = ({ filters }) => {
     }
 
     fetchFromAPI();
-  }, [latitude, longitude, params, restaurantList, startFromOffset]);
-
-
+  }, [params]);
+  
   useScrolledToEndListener(scrollEndCallback);
 
-  if (startFromOffset === null) {
+  if (!latitude || !longitude) {
     return (
       <EndOfListLabel label="Please choose a location to find all restaurants" />
     );

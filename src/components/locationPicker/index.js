@@ -60,24 +60,23 @@ export default ({ setShowSideBar }) => {
             <PlacesAutoComplete
               value={searchQuery}
               onChange={setSearchQuery}
+              debounce={1000}
             >
               {
-                ({
- getInputProps, suggestions, getSuggestionItemProps, loading,
-}) => (
-  <div>
-    <div className="input-wrapper">
-      <input
-        ref={inputRef}
-        {
+                ({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
+                  <div>
+                    <div className="input-wrapper">
+                      <input
+                        ref={inputRef}
+                        {
                           ...getInputProps({
                             className: 'search-input',
                             placeholder: 'Search for area, street name...',
                           })
                         }
-      />
-    </div>
-    {
+                      />
+                    </div>
+                    {
                       suggestions.map(({ id, description, formattedSuggestion }) => (
                         <PlacesListItem
                           key={id}
@@ -89,7 +88,7 @@ export default ({ setShowSideBar }) => {
                         />
                       ))
                     }
-  </div>
+                  </div>
                 )
               }
             </PlacesAutoComplete>
