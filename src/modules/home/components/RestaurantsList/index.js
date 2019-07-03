@@ -10,11 +10,8 @@ import { updateRestaurantList, updateHasMoreData } from 'action-creators';
 import './styles.scss';
 
 const RestaurantList = ({ filters }) => {
-  // const [startFromOffset, setStartFromOffset] = useState(0);
-  // const [restaurantList, setRestaurantList] = useState([]);
   const isMounted = useRef();
   const [isRequestInProgress, setIsRequestInProgress] = useState(false);
-  // const [hasMoreData, setHasMoreData] = useState(true);
   const [appContextValue, dispatch] = useAppContext();
   const {
     userLocation: { latitude, longitude } = {},
@@ -23,13 +20,6 @@ const RestaurantList = ({ filters }) => {
   const scrollEndCallback = useCallback(() => {
     (!isRequestInProgress && hasMoreData) && dispatch(updateRestaurantList(restaurantList, startFromOffset + 20));
   }, [startFromOffset, isRequestInProgress, hasMoreData]);
-  
-  // useEffect(() => {
-  //   if (latitude && longitude) {
-  //     dispatch(updateRestaurantList([], 0));
-  //     dispatch(updateHasMoreData(false));
-  //   }
-  // }, [latitude, longitude]);
   
   const params = useMemo(() => ({
     ...filters,
@@ -57,7 +47,8 @@ const RestaurantList = ({ filters }) => {
         const nextRestaurantList = apiResponseData.restaurants.map(({ restaurant }) => restaurant);
 
         nextRestaurantList.length ?
-          dispatch(updateRestaurantList(restaurantList.concat(nextRestaurantList), startFromOffset)) : dispatch(updateHasMoreData(false));
+          dispatch(updateRestaurantList(restaurantList.concat(nextRestaurantList), startFromOffset)) :
+          dispatch(updateHasMoreData(false));
         setIsRequestInProgress(false);
       }
     }
