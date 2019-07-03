@@ -68,7 +68,7 @@ module.exports = {
   },
   plugins: [
     htmlWebpackPlugin,
-    //new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new Dotenv({ systemvars: true }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
