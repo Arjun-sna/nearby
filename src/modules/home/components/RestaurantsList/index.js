@@ -29,14 +29,14 @@ const RestaurantList = ({ filters }) => {
     ...locationFilter,
   };
   const scrollEndCallback = useCallback(() => {
-    (!isRequestInProgress && hasMoreData) && setStartFromOffset(startFromOffset + 20)
+    (!isRequestInProgress && hasMoreData) && setStartFromOffset(startFromOffset + 20);
   }, [startFromOffset, isRequestInProgress, hasMoreData]);
-  
+
   useEffect(() => {
     if (latitude && longitude) {
       setRestaurantList([]);
       setHasMoreData(true);
-      setStartFromOffset(0)
+      setStartFromOffset(0);
     }
   }, [latitude, longitude]);
 
@@ -44,10 +44,10 @@ const RestaurantList = ({ filters }) => {
     async function fetchFromAPI() {
       if (latitude && longitude) {
         setIsRequestInProgress(true);
-        
+
         const apiResponseData = await ApiService.getAllRestaurants(params);
         const nextRestaurantList = apiResponseData.restaurants.map(({ restaurant }) => restaurant);
-        
+
         nextRestaurantList.length ?
           setRestaurantList(restaurantList.concat(nextRestaurantList)) : setHasMoreData(false);
         setIsRequestInProgress(false);
@@ -55,15 +55,15 @@ const RestaurantList = ({ filters }) => {
     }
 
     fetchFromAPI();
-  }, [startFromOffset]);
-  
+  }, [latitude, longitude, params, restaurantList, startFromOffset]);
+
 
   useScrolledToEndListener(scrollEndCallback);
 
   if (startFromOffset === null) {
     return (
-      <EndOfListLabel label='Please choose a location to find all restaurants'/>
-    )
+      <EndOfListLabel label="Please choose a location to find all restaurants" />
+    );
   }
 
   return (

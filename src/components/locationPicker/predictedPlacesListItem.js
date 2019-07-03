@@ -7,9 +7,9 @@ const PlacesListItem = ({
   mainText,
   secondaryText,
   onClick,
-  getOtherProps
+  getOtherProps,
 }) => (
-  <div className="list-item-container" { ...getOtherProps({description, secondaryText, mainText },{ onClick: () => onClick({ description, secondaryText, mainText }) }) }>
+  <div className="list-item-container" {...getOtherProps({ description, secondaryText, mainText }, { onClick: () => onClick({ description, secondaryText, mainText }) })}>
     <div>
       <FontAwesomeIcon icon="map-marker-alt" color="#00000099" size="sm" />
     </div>
