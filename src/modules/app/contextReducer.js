@@ -7,6 +7,22 @@ export default (state, { type, payload }) => {
         ...state,
         userLocation: payload,
       };
+    case Actions.UPDATE_RESTAURANT_LIST:
+      return {
+        ...state,
+        restaurantListData: {
+          ...state.restaurantListData,
+          ...payload,
+        },
+      };
+    case Actions.UPDATE_RESTAURANT_LIST_HAS_MORE_DATA:
+      return {
+        ...state,
+        restaurantListData: {
+          ...state.restaurantListData,
+          hasMoreData: payload,
+        }
+      }
     default: throw new Error('Unexpected action');
   }
 };
