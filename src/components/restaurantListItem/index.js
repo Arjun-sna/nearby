@@ -1,6 +1,7 @@
 import React from 'react';
-import './styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import RestaurantPlaceholder from 'assets/images/restaurant.png';
+import './styles.scss';
 
 const RestaurantListItem = ({ restaurantData }) => {
   const {
@@ -14,7 +15,11 @@ const RestaurantListItem = ({ restaurantData }) => {
   return (
     <div className="restaurant-list-item-container">
       <div className="restaurant-list-item-cover-img">
-        <img src={thumb} alt="restaurant cover" />
+      {
+        thumb ? <img src={thumb} alt="restaurant cover" /> :
+          <img src={RestaurantPlaceholder} alt="restaurant cover" />
+
+      }
       </div>
       <div className="restaurant-list-item-detail-container">
         <div className="restaurant-list-item-name">{name}</div>
