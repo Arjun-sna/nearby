@@ -6,6 +6,11 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         userLocation: payload,
+        restaurantListData: {
+          restaurantList: [],
+          hasMoreData: true,
+          startFromOffset: 0,
+        }
       };
     case Actions.UPDATE_RESTAURANT_LIST:
       return {

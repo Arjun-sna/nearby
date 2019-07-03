@@ -57,7 +57,7 @@ const RestaurantList = ({ filters }) => {
         const nextRestaurantList = apiResponseData.restaurants.map(({ restaurant }) => restaurant);
 
         nextRestaurantList.length ?
-          dispatch(updateRestaurantList(restaurantList.concat(nextRestaurantList), startFromOffset)) : setHasMoreData(false);
+          dispatch(updateRestaurantList(restaurantList.concat(nextRestaurantList), startFromOffset)) : dispatch(updateHasMoreData(false));
         setIsRequestInProgress(false);
       }
     }
