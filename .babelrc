@@ -13,6 +13,7 @@
         "alias": {
           "~": "./src",
           "assets": "./assets",
+          "action-creators": "./src/actions/actionCreators.js"
         }
       }
     ],

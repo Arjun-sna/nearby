@@ -3,9 +3,9 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Script from 'react-load-script';
 import PlacesAutoComplete, { getLatLng, geocodeByAddress } from 'react-places-autocomplete';
-import { getPlacePredictionsForSearchQuery, geoCodeLocation } from '~/utils';
 import { useAppContext } from '~/modules/app/contextProvider';
 import PlacesListItem from './predictedPlacesListItem';
+import { updateLocationData } from 'action-creators';
 import './style.scss';
 
 export default ({ setShowSideBar }) => {
@@ -25,7 +25,7 @@ export default ({ setShowSideBar }) => {
       const { lat: latitude, lng: longitude } = await getLatLng(geoCodeData[0]);
       // TODO: handle error with a toast
       const locationData = { ...selectedLocation, latitude, longitude };
-      dispatch({ type: 'UPDATE_USER_LOCATION', payload: locationData });
+      dispatch(updateLocationData(locationData));
       setShowSideBar(false);
     }
 

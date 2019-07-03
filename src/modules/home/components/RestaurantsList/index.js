@@ -13,7 +13,7 @@ const RestaurantList = ({ filters }) => {
   const [restaurantList, setRestaurantList] = useState([]);
   const [isRequestInProgress, setIsRequestInProgress] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(true);
-  const [appContextValue] = useAppContext();
+  const [appContextValue, dispatch] = useAppContext();
   const { userLocation: { latitude, longitude } = {} } = appContextValue;
   
   const scrollEndCallback = useCallback(() => {
