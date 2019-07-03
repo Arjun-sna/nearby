@@ -32,16 +32,17 @@ export default ({ setShowSideBar }) => {
     if (selectedLocation) {
       getGeoCodeForLocationDescription();
     }
-  }, [selectedLocation]);
+  }, [dispatch, selectedLocation, setShowSideBar]);
 
-  const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places`
+  const scriptUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API_KEY}&libraries=places`;
   const handleScriptLoad = () => setGoogleLibraryScriptLoaded(true);
 
   return (
     <React.Fragment>
-      <Script url={scriptUrl}
-        onLoad={handleScriptLoad}        
-      /> 
+      <Script
+        url={scriptUrl}
+        onLoad={handleScriptLoad}
+      />
       <div className="overlay-container" onClick={() => setShowSideBar(false)} />
       <CSSTransitionGroup
         transitionName="side-bar"
@@ -55,27 +56,29 @@ export default ({ setShowSideBar }) => {
             <FontAwesomeIcon className="close-button" icon="window-close" size="1x" />
           </div>
           {
-            isGoogleLibraryScriptLoaded && 
+            isGoogleLibraryScriptLoaded &&
             <PlacesAutoComplete
               value={searchQuery}
               onChange={setSearchQuery}
             >
               {
-                ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                  <div>
-                    <div className="input-wrapper">
-                      <input
-                        ref={inputRef}
-                        {
+                ({
+ getInputProps, suggestions, getSuggestionItemProps, loading,
+}) => (
+  <div>
+    <div className="input-wrapper">
+      <input
+        ref={inputRef}
+        {
                           ...getInputProps({
-                            className: "search-input",
-                            placeholder: "Search for area, street name..."
+                            className: 'search-input',
+                            placeholder: 'Search for area, street name...',
                           })
                         }
-                      />
-                    </div>
-                    {
-                      suggestions.map(({id, description, formattedSuggestion }) => (
+      />
+    </div>
+    {
+                      suggestions.map(({ id, description, formattedSuggestion }) => (
                         <PlacesListItem
                           key={id}
                           description={description}
@@ -86,7 +89,7 @@ export default ({ setShowSideBar }) => {
                         />
                       ))
                     }
-                  </div>
+  </div>
                 )
               }
             </PlacesAutoComplete>
