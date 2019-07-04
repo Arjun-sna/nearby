@@ -7,7 +7,7 @@ import EndOfListLabel from '~/components/endOfListLabel';
 import { useAppContext } from '~/modules/app/contextProvider';
 import useScrolledToEndListener from '~/modules/home/useScrolledToEndListener';
 import { updateRestaurantList, updateHasMoreData } from 'action-creators';
-import './styles.scss';
+import styles from './styles.scss';
 
 const RestaurantList = ({ filters }) => {
   const isMounted = useRef();
@@ -65,7 +65,7 @@ const RestaurantList = ({ filters }) => {
 
   return (
     <React.Fragment>
-      <div className="restaurant-list-container">
+      <div className={styles['restaurant-list-container']}>
         {
           restaurantList.map(restaurant => (
             <LazyLoad key={restaurant.id} height={150} >
