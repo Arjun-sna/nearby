@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
@@ -68,7 +69,7 @@ module.exports = {
   },
   plugins: [
     htmlWebpackPlugin,
-    //new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new Dotenv({ systemvars: true }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
@@ -76,7 +77,15 @@ module.exports = {
     })
   ],
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
+    minimizer: [new TerserPlugin({
+      cache: true,
+      parallel: true,
+      terserOptions: {
+        compress: {
+          drop_console: true,
+        }
+      }
+    })],
   },
   devServer: {
     historyApiFallback: true,
