@@ -41,14 +41,31 @@ module.exports = {
         ],
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader"
+          {
+            loader: "css-loader",
+            options: devMode ? {} : {
+              modules: true,
+              modules: {
+                localIdentName: '[sha1:hash:hex:4]'
+              },
+              importLoaders: 1,
+            }
+          }
         ]
       },
       {
         test: /\.s?[ac]ss$/,
         use: [
            MiniCssExtractPlugin.loader,
-           'css-loader',
+           {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: devMode ? '[name]__[local]___[hash:base64:5]' : '[sha1:hash:hex:4] '
+              },
+              importLoaders: 1,
+            }
+          },
            'sass-loader',
         ],
       },
