@@ -6,7 +6,7 @@ import PlacesAutoComplete, { getLatLng, geocodeByAddress } from 'react-places-au
 import { useAppContext } from '~/modules/app/contextProvider';
 import PlacesListItem from './predictedPlacesListItem';
 import { updateLocationData } from 'action-creators';
-import './style.scss';
+import styles from './styles.scss';
 
 export default ({ setShowSideBar }) => {
   const inputRef = useRef();
@@ -43,17 +43,17 @@ export default ({ setShowSideBar }) => {
         url={scriptUrl}
         onLoad={handleScriptLoad}
       />
-      <div className="overlay-container" onClick={() => setShowSideBar(false)} />
+      <div className={styles['overlay-container']} onClick={() => setShowSideBar(false)} />
       <CSSTransitionGroup
-        transitionName="side-bar"
+        transitionName='side-bar'
         transitionAppear
         transitionAppearTimeout={3000}
         transitionEnterTimeout={100}
         transitionLeaveTimeout={300}
       >
-        <div key="location-picker-side-bar" className="side-bar-container">
-          <div className="close-button-wrapper" onClick={() => setShowSideBar(false)}>
-            <FontAwesomeIcon className="close-button" icon="window-close" size="1x" />
+        <div key='location-picker-side-bar' className={styles['side-bar-container']}>
+          <div className={styles['close-button-wrapper']} onClick={() => setShowSideBar(false)}>
+            <FontAwesomeIcon className={styles['close-button']} icon='window-close' size='1x' />
           </div>
           {
             isGoogleLibraryScriptLoaded &&
@@ -65,12 +65,12 @@ export default ({ setShowSideBar }) => {
               {
                 ({getInputProps, suggestions, getSuggestionItemProps, loading}) => (
                   <div>
-                    <div className="input-wrapper">
+                    <div className={styles['input-wrapper']}>
                       <input
                         ref={inputRef}
                         {
                           ...getInputProps({
-                            className: 'search-input',
+                            className: styles['search-input'],
                             placeholder: 'Search for area, street name...',
                           })
                         }

@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import rippleLoader from 'assets/images/ripple.svg';
-import './styles.scss';
+import styles from './styles.scss';
 
 const Loader = ({ size }) => (
-  <div className={`loader-container ${size}`}>
+  <div className={`${styles['loader-container']} ${styles[size]}`}>
     <img src={rippleLoader} alt="Loading..." />
   </div>
 );

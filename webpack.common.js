@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
@@ -40,14 +41,31 @@ module.exports = {
         ],
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader"
+          {
+            loader: "css-loader",
+            options: devMode ? {} : {
+              modules: true,
+              modules: {
+                localIdentName: '[sha1:hash:hex:4]'
+              },
+              importLoaders: 1,
+            }
+          }
         ]
       },
       {
         test: /\.s?[ac]ss$/,
         use: [
            MiniCssExtractPlugin.loader,
-           'css-loader',
+           {
+            loader: "css-loader",
+            options: {
+              modules: {
+                ...(devMode && { localIdentName: '[name]__[local]___[hash:base64:5]' })
+              },
+              importLoaders: 1,
+            }
+          },
            'sass-loader',
         ],
       },
@@ -68,7 +86,7 @@ module.exports = {
   },
   plugins: [
     htmlWebpackPlugin,
-    //new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new Dotenv({ systemvars: true }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
@@ -76,7 +94,15 @@ module.exports = {
     })
   ],
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
+    minimizer: [new TerserPlugin({
+      cache: true,
+      parallel: true,
+      terserOptions: {
+        compress: {
+          drop_console: true,
+        }
+      }
+    })],
   },
   devServer: {
     historyApiFallback: true,
