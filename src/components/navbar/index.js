@@ -5,7 +5,7 @@ import styles from './styles.scss';
 
 export default ({ setShowSideBar }) => (
   <div className={styles['navbar']}>
-    <div className={styles['nav-content container']}>
+    <div className={`${styles['nav-content']} container`}>
       <Link to='/' className={styles['logo']}>
         NearBy
       </Link>

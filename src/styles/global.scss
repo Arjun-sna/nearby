@@ -14,11 +14,10 @@
 
 body {
   margin: 0;
-  font-family: roboto-regular;
   background: rgb(243, 243, 243);
 }
 
-.container {
+:global(.container) {
   max-width: 1024px;
   margin: auto;
 }
