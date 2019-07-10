@@ -66,8 +66,8 @@ export default ({ location }) => {
             </div>
           </Col>
           <Col xs={4}>
-            <div className={styles['rating-box']}>
-              4.5
+            <div className={styles['rating-box']} style={{ background: `#${restaurantData.user_rating ? restaurantData.user_rating.rating_color : 'red'}` }}>
+              {restaurantData.user_rating ? restaurantData.user_rating.aggregate_rating : 'NA'}
             </div>
           </Col>
         </Row>
