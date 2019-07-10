@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Col, Row } from 'react-flexbox-grid';
 import styles from './styles.scss';
+import useScrollToTop from '~/modules/home/useScrollToTop';
 
 const renderRestaurantData = (title, content) => (
   <div className={styles['detail-item-container']}>
@@ -13,6 +14,8 @@ const renderRestaurantData = (title, content) => (
   </div>
 )
 const renderAdditionalDetails = (restaurantData) => {
+  useScrollToTop();
+
   const additionalDetails = {
     'Cuisines': restaurantData.cuisines,
     'Opening hours': restaurantData.timings,
