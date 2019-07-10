@@ -13,7 +13,7 @@
 
   }
 
-  .details-section {
+  .header-details-section {
     padding: 20px;
 
     .name {
@@ -32,5 +32,31 @@
       -webkit-text-stroke-width: 3px;
       background-color: white;
     }
+  }
+
+}
+
+.details-section {
+  box-shadow: 0 10px 10px -16px rgba(#7f8c8d, 1);
+  background: white;
+  border-radius: 5px;
+  margin: 20px 0;
+  padding: 20px;
+  width: 100%;
+
+  .detail-item-container {
+    margin: 20px 0;
+  }
+
+  .detail-title {
+    font-family: gotham-bold;
+    font-size: 18px;
+    color: $black60;
+  }
+
+  .detail-content {
+    font-family: gotham-bold;
+    font-size: 14px;
+    color: #89959B;
   }
 }
