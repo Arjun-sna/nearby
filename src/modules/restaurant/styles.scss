@@ -1,0 +1,72 @@
+@import '../../styles/variables';
+
+.details-header-card-container {
+  box-shadow: 0 10px 10px -16px rgba(#7f8c8d, 1);
+  background: white;
+  border-radius: 5px;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+
+  }
+
+  .header-details-section {
+    padding: 20px;
+
+    .name {
+      font-family: gotham-bold;
+      font-size: 26px;
+      color: $black60;
+    }
+
+    .secondary-details {
+      color: #89959B;
+    }
+
+    .dot {
+      -webkit-text-fill-color: #89959B;
+      -webkit-text-stroke-color: #89959B;
+      -webkit-text-stroke-width: 3px;
+      background-color: white;
+    }
+  }
+
+  .rating-box {
+    padding: 4px;
+    background: red;
+    border-radius: 8px;
+    font-family: gotham-bold;
+    color: white;
+    font-size: 30px;
+    float: right;
+    transform: translate(-50%, 50%);
+  }
+}
+
+.details-section {
+  box-shadow: 0 10px 10px -16px rgba(#7f8c8d, 1);
+  background: white;
+  border-radius: 5px;
+  margin: 20px 0;
+  padding: 20px;
+  width: 100%;
+
+  .detail-item-container {
+    margin: 20px 0;
+  }
+
+  .detail-title {
+    font-family: gotham-bold;
+    font-size: 18px;
+    color: $black60;
+  }
+
+  .detail-content {
+    font-family: gotham-bold;
+    font-size: 14px;
+    color: #89959B;
+  }
+}
