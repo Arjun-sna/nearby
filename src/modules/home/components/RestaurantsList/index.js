@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import ApiService from '~/utils/apiService';
 import LazyLoad from 'react-lazyload';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import Loader from '~/components/loader';
 import RestaurantListItem from '~/components/restaurantListItem';
 import EndOfListLabel from '~/components/endOfListLabel';
@@ -66,13 +67,17 @@ const RestaurantList = ({ filters }) => {
   return (
     <React.Fragment>
       <div className={styles['restaurant-list-container']}>
+        <Row>
         {
           restaurantList.map(restaurant => (
             <LazyLoad key={restaurant.id} height={150} >
-              <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />
+              <Col xs={12} md={6}>
+                <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />
+              </Col>
             </LazyLoad>
           ))
         }
+        </Row>
       </div>
       <div>
         {
