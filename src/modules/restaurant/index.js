@@ -29,10 +29,10 @@ const renderAdditionalDetails = (restaurantData) => {
   for(let i = 0; i < detailsLabels.length;) {
     detailsContent.push(
       <Row key={`${detailsLabels[i]}-${detailsLabels[i + 1]}`}>
-        <Col xs={6}>
+        <Col md={6} xs={12}>
           { renderRestaurantData(detailsLabels[i], additionalDetails[detailsLabels[i]]) }
         </Col>
-        <Col xs={6}>
+        <Col md={6} xs={12}>
           { renderRestaurantData(detailsLabels[i + 1], additionalDetails[detailsLabels[i + 1]]) }
         </Col>
       </Row>
@@ -52,16 +52,25 @@ export default ({ location }) => {
     <div className="container">
       <div className={styles['details-header-card-container']}>
         <img src={restaurantData.featured_image} />
-        <div className={styles['header-details-section']}>
-          <div className={styles['name']}>
-            { restaurantData.name }
-          </div>
-          <div className={styles['secondary-details']}>
-            { restaurantData.location.locality }
-            <span className={styles['dot']}>  ·  </span>
-            { restaurantData.establishment[0] }
-          </div>
-        </div>
+        <Row>
+          <Col xs={8}>
+            <div className={styles['header-details-section']}>
+              <div className={styles['name']}>
+                { restaurantData.name }
+              </div>
+              <div className={styles['secondary-details']}>
+                { restaurantData.location.locality }
+                <span className={styles['dot']}>  ·  </span>
+                { restaurantData.establishment[0] }
+              </div>
+            </div>
+          </Col>
+          <Col xs={4}>
+            <div className={styles['rating-box']}>
+              4.5
+            </div>
+          </Col>
+        </Row>
       </div>
       <Grid className={styles['details-section']}>
         { renderAdditionalDetails(restaurantData) }
