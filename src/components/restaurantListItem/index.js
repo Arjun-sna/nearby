@@ -24,7 +24,6 @@ const RestaurantListItem = ({ restaurantData }) => {
         {
           thumb ? <img src={thumb} alt='restaurant cover' /> :
             <img src={RestaurantPlaceholder} alt='restaurant cover' />
-
         }
         </div>
         <div className={styles['restaurant-list-item-detail-container']}>
