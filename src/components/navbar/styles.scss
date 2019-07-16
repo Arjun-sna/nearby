@@ -25,3 +25,9 @@
     color: $white;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .nav-content {
+    flex-direction: column;
+  }
+}
