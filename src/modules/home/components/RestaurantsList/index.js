@@ -71,7 +71,7 @@ const RestaurantList = ({ filters }) => {
         {
           restaurantList.map(restaurant => (
             <LazyLoad key={restaurant.id} height={150} >
-              <Col xs={12} md={6}>
+              <Col className={styles['list-item-column']} xs={12} md={6}>
                 <RestaurantListItem key={restaurant.id} restaurantData={restaurant} />
               </Col>
             </LazyLoad>
