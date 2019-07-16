@@ -24,7 +24,7 @@
   z-index: 10001;
   padding-left: 120px;
   padding-right: 40px;
-  width: 522px;
+  width: 30%;
 
   .input-wrapper {
     border: 1px solid #d4d5d9;
@@ -99,5 +99,19 @@
 
   &:hover {
     background: #0000001A
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .side-bar-container {
+    width: 80%;
+    padding: 0 10px;
+  }
+}
+
+@media screen and (min-width: 415px) and (max-width: 1024px) {
+  .side-bar-container {
+    width: 50%;
+    padding: 0 40px;
   }
 }
