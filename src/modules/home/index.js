@@ -1,6 +1,6 @@
-import React from 'react';
-import CategoriesBar from './components/CategoriesBar';
-import RestaurantList from './components/RestaurantsList';
+import React from "react";
+import CategoriesBar from "./components/CategoriesBar";
+import RestaurantList from "./components/RestaurantsList";
 
 const Home = () => (
   <div>

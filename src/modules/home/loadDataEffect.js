@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import ApiService from '~/utils/apiService';
+import { useEffect, useState } from "react";
+import ApiService from "~/utils/apiService";
 
 export function useLoadDataFromAPI(apiPath, params = {}) {
   const [apiData, setApiData] = useState(null);

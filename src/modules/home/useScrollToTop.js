@@ -1,4 +1,4 @@
-import { useEffect } from 'react'; 
+import { useEffect } from "react";
 function useScrollToTop() {
   useEffect(() => {
     window.scrollTo(0, 0);
