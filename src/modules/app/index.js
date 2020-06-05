@@ -22,7 +22,6 @@ export default () => {
             setShowSideBar={setShowSideBar}
             showSideBar={showSideBar}
           />
-          }
         </Layout>
       </Router>
     </AppContextProvider>
