@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import "../../styles/variables";
 
 .overlay-container {
   position: fixed;
@@ -9,8 +9,12 @@
   background: #282c3f;
   opacity: 0.7;
   overflow: hidden;
-  z-index: 10000;
+  z-index: 100;
+  display: none;
+}
 
+.show-overlay-container {
+  display: block;
 }
 
 .side-bar-container {
@@ -25,6 +29,8 @@
   padding-left: 120px;
   padding-right: 40px;
   width: 30%;
+  transform: translateX(-100%);
+  transition-duration: 0.2s;
 
   .input-wrapper {
     border: 1px solid #d4d5d9;
@@ -47,6 +53,10 @@
   .close-button {
     cursor: pointer;
   }
+}
+
+.show-sidebar-container {
+  transform: translateX(0);
 }
 
 .side-bar-enter {
@@ -73,7 +83,7 @@
 
 .side-bar-appear.side-bar-appear-active {
   transform: translateX(0%);
-  transition: transform .5s ease-in;
+  transition: transform 0.5s ease-in;
 }
 
 .list-item-container {
@@ -90,7 +100,7 @@
       font-family: gotham-bold;
       color: $black60;
     }
-  
+
     .secondary-text {
       font-size: 12px;
       color: #00000080;
@@ -98,7 +108,7 @@
   }
 
   &:hover {
-    background: #0000001A
+    background: #0000001a;
   }
 }
 

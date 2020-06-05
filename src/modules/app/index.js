@@ -18,7 +18,11 @@ export default () => {
       <Router>
         <Layout setShowSideBar={setShowSideBar}>
           <Routes />
-          {showSideBar && <LocationPicker setShowSideBar={setShowSideBar} />}
+          <LocationPicker
+            setShowSideBar={setShowSideBar}
+            showSideBar={showSideBar}
+          />
+          }
         </Layout>
       </Router>
     </AppContextProvider>

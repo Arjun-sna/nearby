@@ -2,16 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import { CSSTransitionGroup } from "react-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Script from "react-load-script";
+import cx from "classnames";
 import PlacesAutoComplete, {
   getLatLng,
-  geocodeByAddress
+  geocodeByAddress,
 } from "react-places-autocomplete";
 import { useAppContext } from "~/modules/app/contextProvider";
 import PlacesListItem from "./predictedPlacesListItem";
 import { updateLocationData } from "action-creators";
 import styles from "./styles.scss";
 
-export default ({ setShowSideBar }) => {
+export default ({ setShowSideBar, showSideBar }) => {
   const inputRef = useRef();
   const [isGoogleLibraryScriptLoaded, setGoogleLibraryScriptLoaded] = useState(
     false
@@ -46,70 +47,66 @@ export default ({ setShowSideBar }) => {
     <React.Fragment>
       <Script url={scriptUrl} onLoad={handleScriptLoad} />
       <div
-        className={styles["overlay-container"]}
+        className={cx(
+          styles["overlay-container"],
+          showSideBar && styles["show-overlay-container"]
+        )}
         onClick={() => setShowSideBar(false)}
       />
-      <CSSTransitionGroup
-        transitionName="side-bar"
-        transitionAppear
-        transitionAppearTimeout={3000}
-        transitionEnterTimeout={100}
-        transitionLeaveTimeout={300}
+      <div
+        key="location-picker-side-bar"
+        className={cx(
+          styles["side-bar-container"],
+          showSideBar && styles["show-sidebar-container"]
+        )}
       >
         <div
-          key="location-picker-side-bar"
-          className={styles["side-bar-container"]}
+          className={styles["close-button-wrapper"]}
+          onClick={() => setShowSideBar(false)}
         >
-          <div
-            className={styles["close-button-wrapper"]}
-            onClick={() => setShowSideBar(false)}
-          >
-            <FontAwesomeIcon
-              className={styles["close-button"]}
-              icon="window-close"
-              size="1x"
-            />
-          </div>
-          {isGoogleLibraryScriptLoaded && (
-            <PlacesAutoComplete
-              value={searchQuery}
-              onChange={setSearchQuery}
-              debounce={1000}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading
-              }) => (
-                <div>
-                  <div className={styles["input-wrapper"]}>
-                    <input
-                      ref={inputRef}
-                      {...getInputProps({
-                        className: styles["search-input"],
-                        placeholder: "Search for area, street name..."
-                      })}
-                    />
-                  </div>
-                  {suggestions.map(
-                    ({ id, description, formattedSuggestion }) => (
-                      <PlacesListItem
-                        key={id}
-                        description={description}
-                        mainText={formattedSuggestion.mainText}
-                        secondaryText={formattedSuggestion.secondaryText}
-                        onClick={setSelectedLocation}
-                        getOtherProps={getSuggestionItemProps}
-                      />
-                    )
-                  )}
-                </div>
-              )}
-            </PlacesAutoComplete>
-          )}
+          <FontAwesomeIcon
+            className={styles["close-button"]}
+            icon="window-close"
+            size="1x"
+          />
         </div>
-      </CSSTransitionGroup>
+        {isGoogleLibraryScriptLoaded && (
+          <PlacesAutoComplete
+            value={searchQuery}
+            onChange={setSearchQuery}
+            debounce={1000}
+          >
+            {({
+              getInputProps,
+              suggestions,
+              getSuggestionItemProps,
+              loading,
+            }) => (
+              <div>
+                <div className={styles["input-wrapper"]}>
+                  <input
+                    ref={inputRef}
+                    {...getInputProps({
+                      className: styles["search-input"],
+                      placeholder: "Search for area, street name...",
+                    })}
+                  />
+                </div>
+                {suggestions.map(({ id, description, formattedSuggestion }) => (
+                  <PlacesListItem
+                    key={id}
+                    description={description}
+                    mainText={formattedSuggestion.mainText}
+                    secondaryText={formattedSuggestion.secondaryText}
+                    onClick={setSelectedLocation}
+                    getOtherProps={getSuggestionItemProps}
+                  />
+                ))}
+              </div>
+            )}
+          </PlacesAutoComplete>
+        )}
+      </div>
     </React.Fragment>
   );
 };
